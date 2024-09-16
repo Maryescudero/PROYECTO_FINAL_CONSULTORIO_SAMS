@@ -1,0 +1,14 @@
+// vistas/dashboard.pug
+
+doctype html
+html
+  head
+    title Dashboard
+  body
+    h1 Bienvenido al Dashboard
+    p Bienvenido, #{usuario.nombre} #{usuario.apellido}.
+    p Tipo de Usuario: #{usuario.funcion}
+    p
+      a(href="/Usuarios/logout") Cerrar Sesión
+      p
+      a(href="/") Regresar al Index

@@ -1,0 +1,93 @@
+//profesional.pug
+doctype html
+html
+    head
+        title Gestión de Profesionales
+        link(rel="stylesheet" href="/stylesheets/profesional.css")
+        script.
+            function toggleSection(sectionId) {
+                const sections = document.querySelectorAll('.section');
+                sections.forEach(section => section.style.display = 'none');
+                document.getElementById(sectionId).style.display = 'block';
+            }
+    body
+        .header
+            h1 Gestión de Profesionales
+        .container
+
+            .sidebar
+                h2 Opciones
+                button(onclick="toggleSection('agregar-profesional-section')") Agregar Profesional
+                button(onclick="toggleSection('lista-profesionales-section')") Ver Lista de Profesionales
+                button(onclick="window.location.href='/profesionales/buscar'") Buscar Profesional
+                button(onclick="window.location.href='/sala'") Regresar a Página Principal
+            .main
+                img(src="/imag/lobby.b6f4f1f9b4245496.jpg", alt="Descripción de la imagen") 
+                .section#agregar-profesional-section(style="display: none;")
+                    if mensajeError
+                        p.error= mensajeError
+                    form#formulario(action="/profesionales/agregar" method="POST")
+                        .form-row
+                            label(for="apellido") Apellido:
+                            input(type="text" id="apellido" name="apellido", required)
+                        .form-row
+                            label(for="nombre") Nombre:
+                            input(type="text" id="nombre" name="nombre", required)
+                        .form-row
+                            label(for="documento") Documento:
+                            input(type="text" id="documento" name="documento", required)
+                        .form-row
+                            label(for="matricula") Matrícula:
+                            input(type="text" id="matricula" name="matricula", required)
+                        .form-row
+                            label(for="domicilio") Domicilio:
+                            input(type="text" id="domicilio" name="domicilio", required)
+                        .form-row
+                            label(for="id_profesion") Profesión:
+                            select(id="id_profesion" name="id_profesion", required)
+                                each profesion in profesiones
+                                    option(value=profesion.id_profesion)= profesion.descripcion
+                        .form-row
+                            label(for="id_especialidad") Especialidad:
+                            select(id="id_especialidad" name="id_especialidad", required)
+                                each especialidad in especialidades
+                                    option(value=especialidad.id_especialidad)= especialidad.descripcion
+                        .form-row
+                            label(for="id_refeps") ID Refeps:
+                            input(type="text" id="id_refeps" name="id_refeps", required)
+                        .form-row
+                            label(for="estado") Estado:
+                            input(type="text" id="estado" name="estado" value="1", required)
+                        button(type="submit") Agregar Profesional
+                .section#lista-profesionales-section(style="display: none;")
+                    if profesionales.length > 0
+                        table
+                            thead
+                                tr
+                                    th Apellido
+                                    th Nombre
+                                    th Documento
+                                    th Matrícula
+                                    th Domicilio
+                                    th Profesión
+                                    th Especialidad
+                                    th ID Refeps
+                                    th Acciones
+                            tbody
+                                each profesional in profesionales
+                                    tr
+                                        td= profesional.apellido
+                                        td= profesional.nombre
+                                        td= profesional.documento
+                                        td= profesional.matricula
+                                        td= profesional.domicilio
+                                        td= profesional.profesion
+                                        td= profesional.especialidad
+                                        td= profesional.id_refeps
+                                        td.actions
+                                            button(onclick=`window.location.href='/profesionales/editar/${profesional.id_profesional}'`) Editar
+                                            form(action=`/profesionales/eliminar/${profesional.id_profesional}?_method=DELETE`, method="POST")
+                                                input(type="hidden" name="_method" value="DELETE")
+                                                button(type="submit") Eliminar
+                    else
+                        p No hay profesionales registrados.

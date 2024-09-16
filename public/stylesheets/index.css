@@ -1,0 +1,65 @@
+/*index.css*/
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('/imag/fondo1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    text-align: center;
+    padding-top: 200px; /* Para centrar verticalmente el contenido */
+}
+
+h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #008CBA;
+    display: inline-block;
+    margin: 10px;
+}
+
+button {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #007BB5;
+}
+
+a button {
+    width: auto; /* Para que el botón no ocupe todo el ancho */
+    padding: 8px 16px; /* Padding más pequeño para diferenciar del botón "Registrar" */
+    font-size: 14px; /* Fuente más pequeña para diferenciar del botón "Registrar" */
+}
+footer {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}

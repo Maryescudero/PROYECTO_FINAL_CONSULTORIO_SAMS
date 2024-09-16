@@ -1,0 +1,43 @@
+//editarPaciente.pug
+doctype html
+html
+  head
+    title Editar Paciente
+    link(rel="stylesheet" href="/stylesheets/editarPaciente.css")
+  body
+    .container
+      .header
+        h1 Gestión de Pacientes
+        button(onclick="window.location.href='/Pacientes'") Regresar
+      #editar-paciente-section
+        h2 Formulario para editar paciente
+        form(id="editar-paciente-form" action=`/Pacientes/editar/${paciente.id_paciente}?_method=PUT` method="POST")
+          .form-row
+            label(for="nombre") Nombre:
+            input(type="text" id="nombre" name="nombre" value=paciente.nombre required)
+          .form-row
+            label(for="apellido") Apellido:
+            input(type="text" id="apellido" name="apellido" value=paciente.apellido required)
+          .form-row
+            label(for="documento") Documento:
+            input(type="text" id="documento" name="documento" value=paciente.documento required)
+          .form-row
+            label(for="fecha_nacimiento") Fecha de Nacimiento:
+            input(type="date" id="fecha_nacimiento" name="fecha_nacimiento" value=paciente.fecha_nacimiento required)
+          .form-row
+            label(for="sexo") Sexo:
+            select(id="sexo" name="sexo" required)
+              option(value="Masculino" selected=paciente.sexo === 'Masculino') Masculino
+              option(value="Femenino" selected=paciente.sexo === 'Femenino') Femenino
+          .form-row
+            label(for="id_plan") Obra Social:
+            select(id="id_plan" name="id_plan" required)
+              each plan in planes
+                option(value=plan.id_plan selected=plan.id_plan==paciente.id_plan)= plan.descripcion
+          .form-row
+            label(for="estado") Estado:
+            select(id="estado" name="estado" required)
+              option(value="1" selected=paciente.estado === 1) Activo
+              option(value="0" selected=paciente.estado === 0) Inactivo
+          .form-row
+            button(type="submit") Guardar Cambios

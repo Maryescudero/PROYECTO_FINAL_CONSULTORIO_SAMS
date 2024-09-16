@@ -1,0 +1,131 @@
+/* buscarPaciente.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #c1d7eb; 
+}
+
+.header {
+    background-color: #af614c;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar {
+    float: left;
+    width: 20%;
+    background-color: #f1f1f1;
+    padding: 20px;
+}
+
+.main {
+    float: left;
+    width: 80%;
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+/* Estilos para los botones */
+button {
+    display: block;
+    margin-bottom: 15px;
+    padding: 20px 100px; /* Aumentar el padding */
+    background-color: #82d6c8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px; 
+    font-size: 18px; 
+}
+
+button:hover {
+    background-color: #b2dcb4;
+}
+
+/* Estilo para el boton Actualizar */
+button[type="button"] {
+    margin-left: 250px; 
+}
+/* Estilo para el boton buscar */
+button[type="submit"]{
+    margin-left: 250px;
+}
+
+/* Estilos para la tabla de pacientes */
+table {
+    width: 80%; /* Ancho de la tabla */
+    margin: 0 auto; /* Centrar la tabla horizontalmente */
+    border-collapse: collapse;
+    background-color: white; 
+    border-radius: 5px; 
+    margin-top: 40px;
+    margin-bottom: 40px; 
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 15px; /* Espaciado interno */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+th {
+    background-color: #9f9999d5;
+    color: rgb(249, 247, 247);
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Estilo para los botones de editar y eliminar */
+button[onclick="editarPaciente"],
+button[onclick="eliminarPaciente"] {
+    margin: 5px;
+    padding: 5px 5px; /* Ajuste del padding */
+    font-size: 14px; /* Reducción del tamaño de la fuente */
+}
+
+/* Estilos para los formularios */
+form {
+    margin-bottom: 20px;
+    background-color: #fff; 
+    padding: 20px; /* Espaciado interno */
+    border-radius: 15px; 
+    max-width: 800px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centrar horizontalmente */
+    border: 1px solid #ccc; /* Agregado */
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    width: calc(100% - 40px); /* Calcular el ancho restando el padding */
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px 40px; /* Aumentar el padding */
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}

@@ -1,0 +1,103 @@
+/* Estilos para el cuerpo de la página */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #EEDFCC; 
+    margin: 0; 
+    padding: 0;
+}
+
+
+header {
+    background-color: #cbced1; 
+    color: rgb(77, 76, 76);
+    padding: 10px 0;
+}
+
+header h1 {
+    margin: 0;
+    text-align: center;
+}
+
+/* Estilos para la barra lateral */
+
+.sidebar {
+    height: calc(100vh - 60px); 
+    background-color: #708090;
+
+    padding: 15px;
+    position: fixed; /* Fijar la barra lateral */
+    top: 60px; /* Ajustar la posición superior para alinear con el encabezado */
+    width: 300px; /* Ancho fijo de la barra lateral */
+    overflow-y: auto; /* Agregar desplazamiento vertical si hay más contenido */
+}
+h2{
+    color: white;
+    text-align: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+
+}
+.sidebar a {
+    color: rgb(30, 29, 29);
+    text-decoration: none;
+    top: 15px;
+}
+
+.sidebar a:hover {
+    background-color: #b6cde5;
+    border-radius: 5px;
+    padding: 5px;
+}
+.sidebar ul.nav.flex-column > li.nav-item a.nav-link {
+    padding: 10px; /* Espaciado dentro de cada elemento <a> */
+    display: block; 
+    transition: background-color 0.3s ease; 
+}
+
+/* Estilos para el contenido principal */
+.content {
+    margin-left: 220px; 
+    padding: 20px;
+}
+
+/* Estilos para la imagen de perfil */
+.profile img {
+    width: 150px; /* Tamaño de la imagen */
+    height: 150px;
+    border-radius: 50%; /* Bordado redondeado */
+    margin-bottom: 10px;
+    margin-left: 70px;
+}
+
+/* Estilos personalizados para el texto animado */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Altura del main para centrar verticalmente */
+    text-align: center;
+    padding-left: 350px; /* Espacio adicional a la izquierda */
+    padding-right: 20px; /* Espacio adicional a la derecha */
+}
+
+.animated-text {
+    display: inline-block;
+    font-size: 150px; /* Tamaño de la fuente */
+    color: #cd9389; /* Color del texto */
+    animation: move 2s infinite;
+}
+
+@keyframes move {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+}
+footer p {
+   text-align: center;
+    font-size: 14px;
+    color: #555;
+}

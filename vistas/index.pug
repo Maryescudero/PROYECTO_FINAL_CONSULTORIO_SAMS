@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        title Página Principal
+        link(rel="stylesheet" href="/stylesheets/index.css")
+    body
+        h1 CENTRO MEDICO SAM'S
+        if usuario
+            p Bienvenido, #{usuario.nombre} #{usuario.apellido}.
+            p Tipo de Usuario: #{usuario.funcion}
+            p
+                a(href="/Usuarios/logout") Cerrar Sesión
+        else
+            a(href="/Usuarios/login")
+                button(type="button") Iniciar Sesión
+            br
+            button(type="button" onclick="window.location='/Usuarios/registro'") Registrarse
+footer 
+    p © 2024 Centro Médico Sam's. Todos los derechos reservados.

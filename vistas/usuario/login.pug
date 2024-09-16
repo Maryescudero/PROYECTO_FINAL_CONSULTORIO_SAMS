@@ -1,0 +1,24 @@
+// vistas/usuario/login.pug
+
+
+doctype html
+html
+    head
+        title Iniciar Sesión
+        link(rel="stylesheet" href="/stylesheets/login.css")
+    body
+        h1 Iniciar Sesión
+            if errorMessage
+                p.error #{errorMessage}
+            form(action="/Usuarios/login" method="POST")
+                label(for="usuario") Usuario:
+                input(type="text" name="usuario" required)
+                br
+                label(for="password") Contraseña:
+                input(type="password" name="password" required)
+                br
+                input(type="submit" value="Iniciar Sesión")
+    footer 
+        p © 2024 Centro Médico Sam's. Todos los derechos reservados.
+
+

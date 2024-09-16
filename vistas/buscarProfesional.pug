@@ -1,0 +1,56 @@
+
+
+// buscarProfesional.pug
+
+doctype html
+html
+    head
+        title Buscar Profesional
+        link(rel="stylesheet", href="/stylesheets/buscarProfesional.css")
+    body
+        .header
+            h1 Buscar Profesional
+            button(onclick="window.location.href='/profesionales'") Regresar
+
+        .container
+            //- Formulario para buscar profesionales por especialidad
+            form#searchForm(action="/profesionales/buscar", method="GET")
+                label(for="filtro") Filtro por especialidad:
+                input(type="text", id="filtro", name="filtro", required)
+                button(type="submit") Buscar
+
+            if mensaje
+                p.error-message= mensaje
+
+            if profesionales.length > 0
+                table
+                    thead
+                        tr
+                            th Apellido
+                            th Nombre
+                            th Documento
+                            th Matrícula
+                            th Domicilio
+                            th Profesión
+                            th Especialidad
+                            th ID Refeps
+                            th Acciones
+                    tbody
+                        each profesional in profesionales
+                            tr
+                                td= profesional.apellido
+                                td= profesional.nombre
+                                td= profesional.documento
+                                td= profesional.matricula
+                                td= profesional.domicilio
+                                td= profesional.profesion
+                                td= profesional.especialidad
+                                td= profesional.id_refeps
+                                td.actions
+                                    button(onclick=`window.location.href='/profesionales/editar/${profesional.id_profesional}'`) Editar
+                                    form(action=`/profesionales/eliminar/${profesional.id_profesional}`, method="POST")
+                                        input(type="hidden", name="_method", value="DELETE")
+                                        button(type="submit") Eliminar
+            
+
+

@@ -1,0 +1,35 @@
+//- editarMedicamento.pug
+
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Editar Medicamento
+  body
+    h1 Editar Medicamento
+    form(action=`/medicamentos/${medicamento.id_medicamento}?_method=PUT`, method="POST")
+      .form-group
+        label(for="nombre_generico") Nombre Genérico
+        input#nombre_generico.form-control(type="text", name="nombre_generico", value=medicamento.nombre_generico, required)
+      .form-group
+        label(for="nombre_comercial") Nombre Comercial
+        input#nombre_comercial.form-control(type="text", name="nombre_comercial", value=medicamento.nombre_comercial, required)
+      .form-group
+        label(for="id_categoria") Categoría
+        select#id_categoria.form-control(name="id_categoria", required)
+          each categoria in categorias
+            option(value=categoria.id_categoria, selected=categoria.id_categoria === medicamento.id_categoria)= categoria.categoria
+      .form-group
+        label(for="id_familia") Familia
+        select#id_familia.form-control(name="id_familia", required)
+          each familia in familias
+            option(value=familia.id_familia, selected=familia.id_familia === medicamento.id_familia)= familia.familia
+      .form-group
+        label(for="activo") Activo
+        input#activo.form-control(type="checkbox", name="activo", checked=medicamento.activo)
+      button.btn.btn-primary(type="submit") Guardar Cambios
+    hr
+    a(href="/medicamentos") Volver al Listado
+    br
+    a(href="/logout") Cerrar sesión

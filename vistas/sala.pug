@@ -1,0 +1,41 @@
+//sala.pug
+doctype html
+html
+    head
+        title Sala de Control
+        link(rel="stylesheet" href="/stylesheets/sala.css")
+    body
+        header
+            h1.text-center  Centro Médico Sam's
+        .container-fluid
+            .row
+                .col-md-2.sidebar
+                    .profile.text-center
+                        img(src="/imag/usuario2.jpg" alt="Profile Picture" class="img-fluid rounded-circle")
+                        h2= usuario.nombre 
+                        h2= usuario.funcion 
+                    nav
+                        ul.nav.flex-column
+                            if usuario.funcion=="administrador"
+                                li.nav-item
+                                    a.nav-link(href="#") Acceso Administrador
+                                    ul.submenu
+                                            a.nav-link(href="/Pacientes") Pacientes
+                                            a.nav-link(href="/Profesionales") Profesionales         
+                            if usuario.funcion=='profesional'
+                                li.nav-item     
+                                    a.nav-link(href="/Pacientes") Pacientes
+                                    ul.submenu
+                                        li.nav.item
+                                            a.nav-link(href="/Atencion") Prescripción
+                                        li.nav-item
+                                            a.nav-link(href="/Historial") Historial
+                                        li.nav-item
+                                            a.nav-link(href="/medicamentos") Medicamentos
+                            li.nav-item
+                                a.nav-link(href="/logout") Cerrar Sesión
+                .col-md-10.content
+        main
+            h1.animated-text BIENVENIDO 
+        footer 
+            p © 2024 Centro Médico Sam's. Todos los derechos reservados.

@@ -1,0 +1,199 @@
+
+/* profesional.css */
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Estilos para la imagen */
+img {
+    width: 100%; 
+    height: 100%
+  }
+
+.header {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    background-color: #495057;
+    color: #b0aaaa;
+    padding: 20px;
+    width: 220px;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #6c757d;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.sidebar button:hover {
+    background-color: #868e96;
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #d3c8c8;
+}
+
+.section {
+    display: none;
+}
+
+h2 {
+    color: #d2dbe3;
+    text-align: center;
+}
+
+/* Estilos para el formulario de agregar profesional */
+#agregar-profesional-section {
+    text-align: center;
+}
+
+#agregar-profesional-section form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    justify-items: start;
+    align-items: center;
+    max-width: 500px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: #fff;
+    font-size: 16px;
+    margin: 0 auto;
+}
+
+#agregar-profesional-section form .form-row {
+    display: contents;
+}
+
+#agregar-profesional-section form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#agregar-profesional-section form input,
+#agregar-profesional-section form select {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#agregar-profesional-section form button[type="submit"] {
+    grid-column: span 2;
+    background-color: #131516;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+#agregar-profesional-section form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para la tabla de listado de profesionales */
+#lista-profesionales-section {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#lista-profesionales-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed;
+}
+
+#lista-profesionales-section th {
+    background-color: #9bb2ca;
+    color: #fff;
+    font-size: 14px;
+}
+
+#lista-profesionales-section th,
+#lista-profesionales-section td {
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+#lista-profesionales-section tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#lista-profesionales-section tbody tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
+
+#lista-profesionales-section tbody tr:hover {
+    background-color: #d9d9d9;
+}
+
+#lista-profesionales-section tbody td {
+    border-top: 1px solid #dee2e6;
+}
+
+/* Estilo para los botones de editar y eliminar */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.actions button,
+.actions form button {
+    width: 100%;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #82d6c8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.actions button:hover,
+.actions form button:hover {
+    background-color: #b2dcb4;
+}

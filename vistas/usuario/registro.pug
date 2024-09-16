@@ -1,0 +1,32 @@
+//usuario.pug
+
+
+doctype html
+html
+    head
+        title Registro
+        link(rel="stylesheet" href="/stylesheets/registro.css")
+    body
+        h1 Registro de Usuario
+        form(action="/Usuarios/registro" method="POST")
+            label(for="nombre") Nombre:
+            input(type="text" name="nombre" required)
+            br
+            label(for="apellido") Apellido:
+            input(type="text" name="apellido" required)
+            br
+            label(for="funcion") Función:
+            select(name="funcion" required)
+                option(value="administrador") Administrador
+                option(value="profesional") Profesional
+            br
+            label(for="usuario") Usuario:
+            input(type="text" name="usuario" required)
+            br
+            label(for="password") Contraseña:
+            input(type="password" name="password" required)
+            br
+            input(type="submit" value="Registrar")
+footer 
+    p © 2024 Centro Médico Sam's. Todos los derechos reservados.       
+

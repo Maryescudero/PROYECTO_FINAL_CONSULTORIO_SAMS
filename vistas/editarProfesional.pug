@@ -1,0 +1,50 @@
+doctype html
+html
+    head
+        title Editar Profesional
+        link(rel="stylesheet", href="/stylesheets/editarProfesional.css")
+    body
+        .header
+            h1 EDITAR PROFESIONAL
+            //button(onclick="window.location.href='/profesionales'") Regresar
+
+        .container
+            .section#editar-profesional-section
+                h2 Formulario para editar profesional
+                form#editar-profesional-form(action=`/profesionales/editar/${profesional.id_profesional}`, method="POST")
+                    input(type="hidden", name="_method", value="PUT")
+                    .form-row
+                        label(for="apellido") Apellido:
+                        input(type="text", id="apellido", name="apellido", value=profesional.apellido, required)
+                    .form-row
+                        label(for="nombre") Nombre:
+                        input(type="text", id="nombre", name="nombre", value=profesional.nombre, required)
+                    .form-row
+                        label(for="documento") Documento:
+                        input(type="text", id="documento", name="documento", value=profesional.documento, required)
+                    .form-row
+                        label(for="matricula") Matrícula:
+                        input(type="text", id="matricula", name="matricula", value=profesional.matricula, required)
+                    .form-row
+                        label(for="domicilio") Domicilio:
+                        input(type="text", id="domicilio", name="domicilio", value=profesional.domicilio, required)
+                    .form-row
+                        label(for="id_profesion") Profesión:
+                        select(id="id_profesion", name="id_profesion", required)
+                            each profesion in listaProfesiones
+                                option(value=profesion.id_profesion, selected=profesion.id_profesion == profesional.id_profesional_profesion)= profesion.descripcion
+                    .form-row
+                        label(for="id_especialidad") Especialidad:
+                        select(id="id_especialidad", name="id_especialidad", required)
+                            each especialidad in listaEspecialidades
+                                option(value=especialidad.id_especialidad, selected=especialidad.id_especialidad == profesional.id_profesional_especialidad)= especialidad.descripcion
+                    .form-row
+                        label(for="id_refeps") ID Refeps:
+                        input(type="text", id="id_refeps", name="id_refeps", value=profesional.id_refeps, required)
+                    .form-row
+                        label(for="estado") Estado:
+                        select(id="estado", name="estado", required)
+                            option(value="1", selected=profesional.estado == 1) Activo
+                            option(value="0", selected=profesional.estado == 0) Inactivo
+                    .form-row
+                        button(type="submit") Guardar Cambios

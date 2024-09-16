@@ -1,0 +1,167 @@
+/* paciente.css */
+
+/* Estilos generales */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Estilos para la imagen */
+img {
+  max-width: 50%; 
+  height: 50%
+}
+
+.header {
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  margin: 0;
+  margin-top: 40px;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  background-color: #495057;
+  color: #b0aaaa;
+  padding: 20px;
+  width: 250px; /* Ancho ajustado para que coincida con el ejemplo */
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #d2dbe3; /* Color del encabezado de la barra lateral */
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #6c757d;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.sidebar button:hover {
+  background-color: #868e96;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #d3c8c8;
+  
+}
+
+.section {
+  display: none;
+}
+
+h1 {
+  color: #fff; /* Color del encabezado principal */
+  text-align: center;
+  margin: 0;
+  padding: 20px 0; /* Ajuste de padding para separación */
+}
+/* Estilos para la tabla de pacientes */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #1E88E5;
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #e0e0e0;
+}
+
+/* Estilos para el formulario de agregar paciente */
+#agregar-paciente-section {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#agregar-paciente-section form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  justify-items: start;
+  align-items: center;
+}
+
+#agregar-paciente-section form .form-row {
+  display: contents;
+}
+
+#agregar-paciente-section form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#agregar-paciente-section form input,
+#agregar-paciente-section form select {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#agregar-paciente-section form button[type="submit"] {
+  grid-column: span 2;
+  background-color: #1E88E5;
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+#agregar-paciente-section form button[type="submit"]:hover {
+  background-color: #1565C0;
+}

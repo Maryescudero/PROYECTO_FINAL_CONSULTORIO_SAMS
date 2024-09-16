@@ -1,0 +1,199 @@
+//atencion.pug
+doctype html
+html
+  head
+    title Prescripción Médica
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    style.
+      body {
+        background-color: #007bff;
+        color: white;
+      }
+      .container {
+        background-color: #1a1a1a;
+        padding: 20px;
+        border-radius: 5px;
+        color: white;
+      }
+      .form-group label {
+        font-weight: bold;
+      }
+      .form-control {
+        background-color: #333;
+        border: 1px solid #555;
+        color: white;
+      }
+      .btn-primary, .btn-secondary {
+        background-color: #0066cc;
+        border: none;
+      }
+      .btn-primary:hover, .btn-secondary:hover {
+        background-color: #004d99;
+      }
+      .d-flex {
+        display: flex;
+        align-items: center;
+      }
+      .d-flex input {
+        flex-grow: 1;
+      }
+      .ml-2 {
+        margin-left: 10px;
+      }
+  body
+    .container
+      h2.text-center Prescripción Médica
+      form
+        .form-group
+          label(for="nombreMedico") Médico
+          select.form-control#nombreMedico
+            option(value="") Seleccione un médico
+            each profesional in profesionales
+              option(value=profesional.id_profesional)= `${profesional.nombre} ${profesional.apellido}`
+        .form-group
+          label(for="especialidad") Especialidad
+          select.form-control#especialidad
+            option(value="") Seleccione una especialidad
+            each especialidad in especialidades
+              option(value=especialidad.id_especialidad)= especialidad.descripcion
+        .form-group
+          label(for="buscarPaciente") Paciente
+          div.d-flex
+            input.form-control#buscarPaciente(type="text", placeholder="Ingrese el nombre del paciente")
+            button.btn.btn-primary.ml-2(type="button", id="btnBuscarPaciente") Buscar
+        .form-group
+          label(for="dniPaciente") DNI
+          input.form-control#dniPaciente(type="text", readonly=true)
+        .form-group
+          label(for="plan") Obra Social
+          input.form-control#plan(type="text", readonly=true)
+        .form-group
+          label(for="medicamento") Medicamento
+          div.d-flex
+            input.form-control#medicamento(type="text", placeholder="Ingrese el nombre del medicamento")
+            button.btn.btn-primary.ml-2(type="button") Buscar
+        .form-group
+          label(for="cantidad") N° envases / unidades
+          input.form-control#cantidad(type="text", placeholder="Ingrese la cantidad")
+        .form-group
+          label(for="duracion") Duración del tratamiento
+          input.form-control#duracion(type="text", placeholder="Ingrese la duración del tratamiento")
+        .form-group
+          label(for="posologia") Posología
+          input.form-control#posologia(type="text", placeholder="Ingrese la posología")
+        .form-group
+          label(for="unidades") Unidades
+          input.form-control#unidades(type="text", placeholder="Ingrese las unidades")
+        .form-group
+          label(for="fechaPrescripcion") Fecha de la prescripción
+          input.form-control#fechaPrescripcion(type="text", readonly=true, value="13/10/2018")
+          span.hoy
+        .form-group
+          label(for="ordenDisp") N° orden disp.
+          input.form-control#ordenDisp(type="text", placeholder="Ingrese el número de orden")
+        .form-group
+          label(for="diagnostico") Diagnóstico
+          input.form-control#diagnostico(type="text", placeholder="Ingrese el diagnóstico")
+        .form-group
+          label(for="instruccionesPaciente") Instrucciones al paciente
+          input.form-control#instruccionesPaciente(type="text", placeholder="Ingrese las instrucciones")
+        
+        h3 Prestaciones de Estudio
+        .form-group
+          label(for="prestacion") Prestación
+          select.form-control#prestacion
+            option(value="") Seleccione una prestación
+            each prestacion in prestaciones
+              option(value=prestacion.id_prestacion)= prestacion.descripcion
+        .form-group
+          label(for="examen") Examen
+          select.form-control#examen
+            option(value="") Seleccione un examen
+            each examen in examenes
+              option(value=examen.id_examen)= examen.examen
+        .form-group
+          label(for="lado") Lado
+          select.form-control#lado
+            option(value="") Seleccione un lado
+            each lado in lados
+              option(value=lado.id_lado)= lado.lado
+
+        button.btn.btn-success(type="submit") Guardar Prescripción
+
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js", integrity="sha384-HUGiXXmeXPjEDa/46rD4iO7QD1s0bq2/U6TtCQphR5ZnU8+n6ZP+pMymc1W+8XfT", crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCmk7PiEZYn6FpV5h8RkkIEr1b5SkR/p0Jk0", crossorigin="anonymous")
+    script.
+      document.getElementById('btnBuscarPaciente').addEventListener('click', function() {
+        const nombrePaciente = document.getElementById('buscarPaciente').value;
+        fetch(`/Atencion/buscar-paciente?nombre=${nombrePaciente}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.paciente) {
+              document.getElementById('dniPaciente').value = data.paciente.documento;
+              document.getElementById('plan').value = data.paciente.plan_descripcion;
+            } else {
+              alert('Paciente no encontrado');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      });
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var buscarPacienteBtn = document.getElementById('btnBuscarPaciente');
+        var buscarPacienteInput = document.getElementById('buscarPaciente');
+        var resultadosBusqueda = document.getElementById('resultadosBusqueda').getElementsByTagName('tbody')[0];
+        var idPacienteInput = document.getElementById('idPaciente');
+        var pacienteNombreInput = document.getElementById('buscarPaciente');
+        var anioNacimientoInput = document.getElementById('anioNacimiento');
+        var dniPacienteInput = document.getElementById('dniPaciente');
+
+        buscarPacienteBtn.addEventListener('click', function () {
+          var query = buscarPacienteInput.value;
+          if (query.length > 2) {
+            fetch(`/buscar-paciente?query=${query}`)
+              .then(response => response.json())
+              .then(data => {
+                resultadosBusqueda.innerHTML = '';
+                data.pacientes.forEach(paciente => {
+                  var row = resultadosBusqueda.insertRow();
+                  row.innerHTML = `
+                    <td>${paciente.nombre}</td>
+                    <td>${paciente.dni}</td>
+                    <td>${paciente.anioNacimiento}</td>
+                    <td>
+                      <button class="btn btn-primary seleccionar-paciente" 
+                              data-id="${paciente.id}"
+                              data-nombre="${paciente.nombre}"
+                              data-dni="${paciente.dni}"
+                              data-anioNacimiento="${paciente.anioNacimiento}">Seleccionar</button>
+                    </td>
+                  `;
+                });
+
+                document.querySelectorAll('.seleccionar-paciente').forEach(button => {
+                  button.addEventListener('click', function () {
+                    var pacienteId = this.getAttribute('data-id');
+                    var pacienteNombre = this.getAttribute('data-nombre');
+                    var pacienteDni = this.getAttribute('data-dni');
+                    var pacienteAnioNacimiento = this.getAttribute('data-anioNacimiento');
+
+                    idPacienteInput.value = pacienteId;
+                    pacienteNombreInput.value = pacienteNombre;
+                    anioNacimientoInput.value = pacienteAnioNacimiento;
+                    dniPacienteInput.value = pacienteDni;
+
+                    $('#buscarPacienteModal').modal('hide');
+                  });
+                });
+              })
+              .catch(error => {
+                console.error('Error en la búsqueda de pacientes:', error);
+              });
+          } else {
+            alert('Ingrese al menos 3 caracteres para buscar un paciente.');
+          }
+        });
+      });

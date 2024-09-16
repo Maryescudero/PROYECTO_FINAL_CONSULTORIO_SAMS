@@ -1,0 +1,71 @@
+//buscarPaciente.pug
+
+doctype html
+html
+    head
+        title Buscar Paciente
+        link(rel="stylesheet" href="/stylesheets/buscarPaciente.css")
+        script.
+            function limpiarCampo() {
+                document.getElementById('filtroInput').value = '';
+            }
+
+            function limpiarListado() {
+                var listadoPacientes = document.getElementById('listadoPacientes');
+                while (listadoPacientes.firstChild) {
+                    listadoPacientes.removeChild(listadoPacientes.firstChild);
+                }
+            }
+    body
+
+        h1 GESTIÓN DE PACIENTES
+
+        form(id="searchForm" action="/Pacientes/buscar" method="get")
+
+            input(type="text" id="filtroInput" name="filtro" placeholder="Buscar por apellido, documento, obra social" value=filtro)
+            button(type="submit") Buscar
+            button(type="button" onclick="limpiarCampo(); limpiarListado();") Limpiar
+            a(href="/Pacientes") Página Principal
+
+        if pacientes.length > 0
+            table(id="listadoPacientes")
+                thead
+                    tr
+                        th id
+                        th Nombre
+                        th Apellido
+                        th Documento
+                        th Fecha de Nacimiento
+                        th Sexo
+                        th Obra Social
+                        th Estado
+                        th Acciones
+                tbody
+                    each paciente in pacientes
+                        tr
+                        td= paciente.id_paciente
+                        td= paciente.nombre
+                        td= paciente.apellido
+                        td= paciente.documento
+                        td= new Date(paciente.fecha_nacimiento).toLocaleDateString('es-AR')
+                        td= paciente.sexo === 'Masculino' ? 'Masculino' : 'Femenino'
+                        td= paciente.plan_descripcion
+                        td= paciente.estado
+                        td.actions
+                            button(onclick=`window.location.href='/pacientes/editar/${paciente.id_paciente}'`) Editar
+                            form(action=`/pacientes/eliminar/${paciente.id_paciente}`, method="POST", onsubmit="return confirm('¿Estás seguro de que quieres eliminar este paciente?');")
+                                button(type="submit") Eliminar
+                    else
+                        if mensaje
+                            p= mensaje
+
+        script.
+            document.getElementById('searchForm').addEventListener('submit', function(event) {
+                const filtroInput = document.getElementById('filtroInput').value.trim();
+                if (!filtroInput) {
+                    event.preventDefault();
+                    alert('Por favor, ingrese un filtro de búsqueda.');
+                }
+            });
+
+

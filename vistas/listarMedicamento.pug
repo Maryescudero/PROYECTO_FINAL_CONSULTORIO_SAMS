@@ -1,0 +1,35 @@
+//- listarMedicamentos.pug
+
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Listado de Medicamentos
+  body
+    h1 Listado de Medicamentos
+    table.table
+      thead
+        tr
+          th Nombre Genérico
+          th Nombre Comercial
+          th Categoría
+          th Familia
+          th Activo
+          th Acciones
+      tbody
+        each medicamento in medicamentos
+          tr
+            td= medicamento.nombre_generico
+            td= medicamento.nombre_comercial
+            td= medicamento.categoria
+            td= medicamento.familia
+            td= medicamento.activo ? 'Sí' : 'No'
+            td
+              a(href=`/medicamentos/${medicamento.id_medicamento}/editar`) Editar
+              form(action=`/medicamentos/${medicamento.id_medicamento}?_method=DELETE`, method="POST")
+                button(type="submit") Eliminar
+    hr
+    a(href="/medicamentos/nuevo") Crear Nuevo Medicamento
+    br
+    a(href="/logout") Cerrar sesión

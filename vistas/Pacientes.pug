@@ -1,0 +1,121 @@
+// paciente.pug
+
+doctype html
+html
+  head
+    title Gestión de Pacientes
+    link(rel="stylesheet", href="/stylesheets/paciente.css")
+  body
+    .container
+      
+      .sidebar
+        h2 Opciones
+        button(onclick="toggleSection('agregar-paciente-section')") Agregar Paciente
+        button(onclick="toggleSection('lista-pacientes-section')") Ver Lista de Pacientes
+        button(onclick="window.location.href='/Pacientes/buscar'") Buscar Paciente
+        button(onclick="window.location.href='/sala'") Regresar a Página Principal
+
+      .main-content
+        .header
+          h1 GESTIÓN DE PACIENTES
+          img(src="/imag/Captura de pantalla 2024-06-12 230905.png", alt="Descripción de la imagen") 
+        // Formulario para agregar nuevo paciente
+        .section#agregar-paciente-section(style="display: none;")
+          h2 Agregar Nuevo Paciente
+          form#formulario(action="/Pacientes/pacientes", method="POST")
+            .form-row
+              label(for="nombre") Nombre:
+              input(type="text", id="nombre", name="nombre", required)
+            .form-row
+              label(for="apellido") Apellido:
+              input(type="text", id="apellido", name="apellido", required)
+            .form-row
+              label(for="documento") Documento:
+              input(type="text", id="documento", name="documento", required)
+            .form-row
+              label(for="fecha_nacimiento") Fecha de Nacimiento:
+              input(type="date", id="fecha_nacimiento", name="fecha_nacimiento", required)
+            .form-row
+              label(for="sexo") Sexo:
+              select(id="sexo", name="sexo", required)
+                option(value="", disabled, selected) Seleccione una opción
+                option(value="Masculino") Masculino
+                option(value="Femenino") Femenino
+            .form-row
+              label(for="id_plan") Obra Social:
+              select(id="id_plan", name="id_plan", required)
+                option(value="", disabled, selected) Seleccione una opción
+                each plan in planes
+                  option(value=plan.id_plan)= plan.descripcion
+            .form-row
+              label(for="estado") Estado Actual:
+              input(type="text", id="estado", name="estado", required)
+            .form-row
+              button(type="submit") Agregar Paciente
+
+        // Lista de pacientes
+        .section#lista-pacientes-section(style="display: none;")
+          h2 Lista de Pacientes
+          table
+            thead
+              tr
+                th ID Paciente
+                th Nombre
+                th Apellido
+                th Documento
+                th Fecha de Nacimiento
+                th Sexo
+                th Obra Social
+                th Estado Actual
+                th Acciones
+            tbody#listadoPacientes
+              each paciente in pacientes
+                tr
+                  td= paciente.id_paciente
+                  td= paciente.nombre
+                  td= paciente.apellido
+                  td= paciente.documento
+                  td= new Date(paciente.fecha_nacimiento).toLocaleDateString('es-AR')
+                  td= paciente.sexo === 'Masculino' ? 'Masculino' : 'Femenino'
+                  td= paciente.plan_descripcion
+                  td= paciente.estado
+                  td
+                    button(onclick=`editarPaciente(${paciente.id_paciente})`) Editar
+                    button(onclick=`eliminarPaciente(${paciente.id_paciente})`) Eliminar
+
+    script.
+      function toggleSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.style.display = 'none');
+        document.getElementById(sectionId).style.display = 'block';
+      }
+
+      function editarPaciente(id) {
+        window.location.href = `/Pacientes/editar/${id}`;
+      }
+
+      function eliminarPaciente(id) {
+        if (confirm('¿Estás seguro de que quieres eliminar este paciente?')) {
+          fetch(`/Pacientes/${id}`, {
+            method: 'DELETE'
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.mensaje) {
+              alert(data.mensaje);
+              location.reload();
+            } else {
+              alert('Error al eliminar el paciente');
+            }
+          })
+          .catch(error => console.error('Error:', error));
+        }
+      }
+
+      window.onload = function() {
+        const params = new URLSearchParams(window.location.search);
+        const mensajeExito = params.get('mensajeExito');
+        if (mensajeExito && (mensajeExito.includes("agregado") || mensajeExito.includes("editado") || mensajeExito.includes("eliminado"))) {
+          alert(mensajeExito);
+        }
+      }
