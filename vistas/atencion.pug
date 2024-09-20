@@ -44,23 +44,23 @@ html
     .container
       h2.text-center Prescripción Médica
       form
-        .form-group
-          label(for="nombreMedico") Médico
-          select.form-control#nombreMedico
-            option(value="") Seleccione un médico
-            each profesional in profesionales
-              option(value=profesional.id_profesional)= `${profesional.nombre} ${profesional.apellido}`
-        .form-group
-          label(for="especialidad") Especialidad
-          select.form-control#especialidad
-            option(value="") Seleccione una especialidad
-            each especialidad in especialidades
-              option(value=especialidad.id_especialidad)= especialidad.descripcion
+        form(method="post" action="/atencion")
+      .form-group
+        label(for="profesional") Profesional:
+        input#profesional.form-control(type="text", value=`${profesional.nombre} ${profesional.apellido}`, readonly)
+
+      .form-group
+        label(for="especialidad") Especialidad:
+        select#especialidad.form-control(name="especialidadId")
+          each especialidad in especialidades
+            option(value=especialidad.id) #{especialidad.nombre}
         .form-group
           label(for="buscarPaciente") Paciente
           div.d-flex
             input.form-control#buscarPaciente(type="text", placeholder="Ingrese el nombre del paciente")
             button.btn.btn-primary.ml-2(type="button", id="btnBuscarPaciente") Buscar
+            // Nuevo botón para agregar paciente
+            button.btn.btn-secondary.ml-2(type="button", id="btnAgregarPaciente") Agregar
         .form-group
           label(for="dniPaciente") DNI
           input.form-control#dniPaciente(type="text", readonly=true)
@@ -141,6 +141,11 @@ html
           });
       });
 
+ 
+      document.getElementById('btnAgregarPaciente').addEventListener('click', function() {
+        window.location.href = '/Pacientes'; 
+      });
+
       document.addEventListener('DOMContentLoaded', function () {
         var buscarPacienteBtn = document.getElementById('btnBuscarPaciente');
         var buscarPacienteInput = document.getElementById('buscarPaciente');
@@ -196,4 +201,5 @@ html
             alert('Ingrese al menos 3 caracteres para buscar un paciente.');
           }
         });
+        
       });
